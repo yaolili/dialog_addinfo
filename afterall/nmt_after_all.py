@@ -18,8 +18,8 @@ import time
 from collections import OrderedDict
 from data_iterator import TextIterator
 
-theano.config.optimizer='fast_compile'
-theano.config.exception_verbosity='high'
+# theano.config.optimizer='fast_compile'
+# theano.config.exception_verbosity='high'
 # theano.config.compute_test_value='warn'
 
 
@@ -610,9 +610,9 @@ def build_sampler(tparams, options, trng, use_noise):
     
     first = concatenate([zero, topic], axis=1)
     # add one 
-    other = concatenate([gen, zero], axis=1)
+    # other = concatenate([gen, zero], axis=1)
     # add all
-    # other = concatenate([gen, topic], axis=1)
+    other = concatenate([gen, topic], axis=1)
     
     emb = tensor.switch(y[:, None] < 0, first, other)
 
@@ -893,10 +893,10 @@ def prepare_z(x, y, worddicts):
         
         seqy = tuple(y[i])    
         # add all
-        # cur_list = [worddicts[1][seqx]] * len(seqy)
+        cur_list = [worddicts[1][seqx]] * len(seqy)
         # add one
-        cur_list = [0] * len(seqy)
-        cur_list[0] = worddicts[1][seqx]
+        # cur_list = [0] * len(seqy)
+        # cur_list[0] = worddicts[1][seqx]
         z.append(cur_list)
     return z
 
